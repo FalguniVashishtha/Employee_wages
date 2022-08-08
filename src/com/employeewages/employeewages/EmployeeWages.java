@@ -1,70 +1,49 @@
 package com.employeewages.employeewages;
 import java.util.Random;
 public class EmployeeWages {
-    private  String company;
-    static int EMP_RATE_PER_HOUR;
-    static  int workingDaysPerMonth;
-    static  int maxWorkingHours;
-    private int totalEmpWage;
+    final static int FULL_TIME_WORKER = 1;
+    final static int PART_TIME_WORKER = 2;
 
+    public static void computeEmpWage(String company, int EMP_RATE_PER_HOUR, int Total_no_Working_Day, int EMP_TOTAL_HOURS) {
+        int totalworkingdays = 0;
+        int empHours = 0;
+        int empWage = 0;
+        int Totalemphrs = 0;
+        System.out.println("Welcome to Employee Wage Page");
 
+        while (Totalemphrs <= EMP_TOTAL_HOURS && totalworkingdays <= Total_no_Working_Day) {
+            totalworkingdays++;
+            Random random = new Random();
 
-    //Constructor for the class
-    public EmployeeWages(String company, int EMP_RATE_PER_HOUR, int workingDaysPerMonth, int maxWorkingHours)
-    {
-        this.company = company;
-        this.EMP_RATE_PER_HOUR = EMP_RATE_PER_HOUR;
-        this.workingDaysPerMonth = workingDaysPerMonth;
-        this.maxWorkingHours = maxWorkingHours;
-    }
-    public void companyWage(){
-        System.out.printf("Employee Wage details: ", company).println();
+            int empCheck = random.nextInt();
 
-        int empWage = 0, totalWage=0, workingHours = 0, empHours = 0;
-        Random random = new Random();
-
-        //Calculating the total wage per month
-        for (int day = 1; day<=workingDaysPerMonth && workingHours<maxWorkingHours; day++) {
-            //Max Working hours should be 100.
-            int empCheck = random.nextInt(3);
-            switch (empCheck)
-            {
-                case 1:
-                    System.out.printf("Day %d: Employee is Present for full day.", day).println();
+            switch (empCheck) {
+                case FULL_TIME_WORKER:
                     empHours = 8;
+                    System.out.println("Employee is present");
                     break;
-                case 2:
-                    System.out.printf("Day %d: Employee worked for half day.", day).println();
+                case PART_TIME_WORKER:
                     empHours = 4;
+                    System.out.println("Employee is present");
                     break;
                 default:
-                    System.out.printf("Day %d: Employee is Absent.", day).println();
                     empHours = 0;
-                    break;
+                    System.out.println("Employee is absent");
             }
+            Totalemphrs = Totalemphrs + empHours;
             empWage = empHours * EMP_RATE_PER_HOUR;
-            System.out.printf("Worked: "+ empHours + "hours, Wage:$" +empWage).println("\n");
-            totalWage += empWage;
-            workingHours += empHours; //Max Working Hours is 100, loop terminates if it is above 100.
+            int Total_emp_wage = empWage + Totalemphrs;
+            Total_emp_wage = Total_emp_wage * Total_no_Working_Day;
+            System.out.println("The daily wage of Employee of " + company + " is" + empWage);
+            System.out.println("The Monthly Wage of Employee of " + company + " is" + Total_emp_wage);
+
         }
-        totalEmpWage = workingHours*EMP_RATE_PER_HOUR;
-        System.out.printf("The Total wage of "+company+ "for this month: $ " + totalWage).println();
-        System.out.printf("Total hours of working for "+company+": " + workingHours ).println();
-        System.out.println();
     }
-    //overriding the toString() method
-    public String toString(){
-        return "Total wage  for the Company " + company + " is: " + totalEmpWage;
-    }
-    //main method.
-    public static void main(String args[]) {
-        //Welcome message
-        System.out.println("Welcome to Employee Wage Builder. \n");
-        EmployeeWages company1 = new EmployeeWages("Bridgelabz", 20, 20, 100);
-        company1.companyWage();
-        EmployeeWages company2 = new EmployeeWages("TCS", 15, 30, 200);
-        company2.companyWage();
-        System.out.println(company1);
-        System.out.println(company2);
+
+    public static void main(String[] args) {
+        computeEmpWage("Bridgelabz", 20, 20, 200);
+        computeEmpWage("HCL", 45, 30, 300);
+
+
     }
 }
