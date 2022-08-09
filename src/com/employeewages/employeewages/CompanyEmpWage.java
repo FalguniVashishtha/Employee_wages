@@ -1,6 +1,7 @@
 package com.employeewages.employeewages;
 
-public class CompanyEmpWage {
+public class CompanyEmpWage
+{
     // declaring instance variables
     final String COMPANY_NAME;
     final int WAGE_PER_HR;
@@ -19,7 +20,8 @@ public class CompanyEmpWage {
     {
         this.totalEmpWage = totalEmpWage;
     }
-    public String toString() {
+    public String toString()
+    {
         System.out.println("Details of " + COMPANY_NAME + " employee");
         System.out.println("Wage per hour:" + WAGE_PER_HR);
         System.out.println("Maximum working days:" + MAX_WORKING_DAYS);
